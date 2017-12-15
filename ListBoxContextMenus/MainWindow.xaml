@@ -1,0 +1,62 @@
+﻿<Window
+    x:Class="ListBoxContextMenus.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ListBoxContextMenus"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="525"
+    Height="350"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+    <Grid>
+        <ListBox ItemsSource="{Binding Items}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplateSelector>
+                <local:FooBarTemplateSelector>
+                    <local:FooBarTemplateSelector.FooTemplate>
+                        <DataTemplate DataType="{x:Type local:Foo}">
+                            <Border Background="Transparent">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Foo" />
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Foo" />
+                                    <Rectangle Grid.Column="1" Fill="Blue" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </local:FooBarTemplateSelector.FooTemplate>
+
+                    <local:FooBarTemplateSelector.BarTemplate>
+                        <DataTemplate DataType="{x:Type local:Bar}">
+                            <Border Background="Transparent">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Bar" />
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Bar" />
+                                    <Rectangle Grid.Column="1" Fill="Yellow" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </local:FooBarTemplateSelector.BarTemplate>
+                </local:FooBarTemplateSelector>
+            </ListBox.ItemTemplateSelector>
+        </ListBox>
+    </Grid>
+</Window>
